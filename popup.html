@@ -13,9 +13,9 @@
     <title>VelociTClearer</title>
     <style>
         body, html {
-            background: #093028; /* fallback for old browsers */
-          background: -webkit-linear-gradient(to left, #093028 , #237A57); /* Chrome 10-25, Safari 5.1-6 */
-          background: linear-gradient(to left, #093028 , #237A57); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: #2d296b; /* fallback for old browsers */
+          background: -webkit-linear-gradient(to left, #0000ff , lightgray); /* Chrome 10-25, Safari 5.1-6 */
+          background: linear-gradient(to left, #0000ff , lightgray); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
           font-family: 'Roboto', sans-serif;
             cursor: default;
           }
@@ -33,16 +33,27 @@
             float:right;
             cursor: pointer;
           }
+          .boxes{
+            font-size: 15px;
+            text-align: right;
+            letter-spacing: 1px;
+            background: #538aca;
+            width: 100%;
+            border: none;
+            box-sizing: border-box;
+            padding: 13px 13px 13px 13px;
+            color: white;
+          }
           
           #container {
-            background: #7D3B44;
+            background: #538aca;
             width: 360px;
             margin: 10px auto;
             box-shadow: 0 0 3px rgba(0,0,0, 1);
           }
           
           h1 {
-            background: #66202A;
+            background: #538aca;
             color: white;
             margin: 0;
             padding: 10px 20px;
@@ -58,23 +69,33 @@
           }
           
           li {
-            background: #66202A;
+            background: #538aca;
             max-height: 400px;
             line-height: 40px;
             color:  lightgray;
           }
           
           li:nth-child(2n) {
-            background: #7D3B44;
+            background: #0455b1;
           }
-           
+          select {
+            font-size: 15px;
+            text-align: center;
+            letter-spacing: 1px;
+            background: #0455b1;
+            width: 100%;
+            border: none;
+            box-sizing: border-box;
+            padding: 13px 13px 13px 13px;
+            color: white;
+          } 
           
           input {
             font-size: 15px;
             text-align: center;
             letter-spacing: 1px;
-            background: #84593D;
-            width: 100%;
+            background: #538aca;
+            width: 50%;
             border: none;
             box-sizing: border-box;
             padding: 13px 13px 13px 13px;
@@ -82,9 +103,9 @@
           }
                   
           input:focus {
-            background: #84593D;
+            background: #0455b1;
             outline:none;
-            border: 2px solid #84593D;
+            border: 2px solid #0455b1;
             color: white;
           }
           .completed {
@@ -97,7 +118,7 @@
           }
           
           span {
-            background: #217353;
+            background: #470275;
             height: 40px;
             margin-right: 20px;
             text-align: center;
@@ -159,43 +180,48 @@
     </style>
 </head>
 <body>
-    <h1 >VelociTClearer</h1>
+    <h1  >VelociT-Clearer</h1>
+       
+    
     <div>
       
         <div id = "container">
             <h1>Select state </h1>
-            <input type="text" list="stateList"  class="dropbtn" placeholder="[state]">             
-            <datalist id="stateList">
-                <option value="Edge">
-                    <option value="Firefox">
-                    <option value="Chrome">
-                    <option value="Opera">
-                    <option value="Safari">
-            </datalist>
-            <h1>Add issues<i class="removeall">Clear</i><i class="add">+</i></h1>
-            <input type="text" list="stateIssues"class="dropbtn" placeholder="[select issue]">
-            <datalist id="stateIssues"></datalist>
-            <ul id="issuesList">
-              <li><span><i class="fa fa-trash"></i></span><number></number>Go to potions Class </li>
-              <li> <span><i class="fa fa-trash"></i></span><number></number> Buy new Robes </li>
-              <li> <span><i class="fa fa-trash"></i></span><number></number> Visit Hagrid </li>
+             
+            <select class="state">
+                <option> <strong>State</strong></option>
+                <option value="Attorney">Attorney</option>
+                <option value="non-attorney">non-attorney</option>
+                <option value="Florida">Florida</option>
+                <option value="All">All</option>
+            </select>
+            <h1>Add issues<i class="removeall">Clear</i><i class="add">+</i></h1>   
+           
+        <div>
+            <select id="issue" class="issue">
+                
+            </select>
+        </div>
+              <ul >
+              
             </ul>
          </div>
     </div>
 
    
     <h2>Send Email to:</h2>
-     
-        <label>LenderOpen<input type="checkbox" name="contactCheckbox" value="LenderOpen"></label>
-        <label><input type="checkbox" name="contactCheckbox" value="MemberOpen">MemberOpen</label>
+    <div class="boxes">
+       
+        <label>Lender Open<input type="checkbox" name="contactCheckbox" value="lenderOpen"></label><br/>
+        <label>Member Open<input type="checkbox" name="contactCheckbox" value="MemberOpen"></label><br/>
    
-        <label><input type="checkbox" name="contactCheckbox" value="thirdPartyOpen">3rdPartyOpen</label>
-        <label><input type="checkbox" name="contactCheckbox" value="CTSTIC">TIC CTS</label>
+        <label>3rd-PartyOpen<input type="checkbox" name="contactCheckbox" value="thirdPartyOpen"></label><br/>
+        <label>TIC CTS<input type="checkbox" name="contactCheckbox" value="CTSTIC"></label><br/>
 
-        <label><input type="checkbox" name="contactCheckbox" value="ticLender">TICLender</label>
-        <label><input type="checkbox" name="contactCheckbox" value="comments">comments</label>
-  
-    <div class="LenderOpen box">You have selected <strong>LenderOpen checkbox</strong> so i am here</div>
+        <label>TIC Lender<input type="checkbox" name="contactCheckbox" value="ticLender"></label><br/>
+        <label>comments<input type="checkbox" name="contactCheckbox" value="comments"></label><br/>
+    </div>
+    <div class="lenderOpen box">You have selected <strong>MemberOpen checkbox</strong> so i am here</div>
     <div class="MemberOpen box">You have selected <strong>MemberOpen checkbox</strong> so i am here</div>
     <div class="thirdPartyOpen box">You have selected <strong>thirdPartyOpen checkbox</strong> so i am here</div>
     <div class="CTSTIC box">You have selected <strong>CTSTIC checkbox</strong> so i am here</div>
