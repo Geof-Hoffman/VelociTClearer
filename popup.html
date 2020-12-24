@@ -181,7 +181,7 @@
 </head>
 <body>
     <h1  >VelociT-Clearer</h1>
-       
+    
     
     <div>
       
@@ -208,6 +208,7 @@
          </div>
     </div>
 
+
    
     <h2>Send Email to:</h2>
     <div class="boxes">
@@ -221,12 +222,30 @@
         <label>TIC Lender<input type="checkbox" name="contactCheckbox" value="ticLender"></label><br/>
         <label>comments<input type="checkbox" name="contactCheckbox" value="comments"></label><br/>
     </div>
-    <div class="lenderOpen box">You have selected <strong>MemberOpen checkbox</strong> so i am here</div>
-    <div class="MemberOpen box">You have selected <strong>MemberOpen checkbox</strong> so i am here</div>
-    <div class="thirdPartyOpen box">You have selected <strong>thirdPartyOpen checkbox</strong> so i am here</div>
-    <div class="CTSTIC box">You have selected <strong>CTSTIC checkbox</strong> so i am here</div>
-    <div class="ticLender box">You have selected <strong>ticLender checkbox</strong> so i am here</div>
-    <div class="comments box">You have selected <strong>comments checkbox</strong> so i am here</div>
+    
+    <div class="lenderOpen box">     
+      <textarea class="copyLoanOpen" style="width:100%;" rows="5"> </textarea>
+      <p><button class="copyLoanOpenBtn">Copy Opening Email to Loan Processor</button></p>
+    </div>
+    <div class="MemberOpen box">
+      <textarea class="copyMemberOpen" style="width:100%;" rows="5"> </textarea>
+      <p><button class="copyMemberOpenBtn">Copy Opening Email to Member</button></p>
+    </div>
+    <div class="thirdPartyOpen box">
+      <textarea class="thirdPartyOpen" style="width:100%;" rows="5"> </textarea>
+      <p><button class="copythirdPartyOpenBtn">Copy Opening Email to Third Party</button></p>
+    </div>
+    <div class="CTSTIC box">
+      <textarea class="copyCTSTIC" style="width:100%;" rows="5"> </textarea>
+      <p><button class="copyCTSTICBtn">Copy CTS Clear note</button></p>
+    </div>
+    <div class="ticLender box">
+      <textarea class="copyticLender" style="width:100%;" rows="5"> </textarea>
+      <p><button class="copyticLenderBtn">CopyTIC note to loan Processor</button></p>
+    </div>
+    <div class="comments box">
+      <textarea class="copycomments" style="width:100%;" rows="5"> </textarea>      
+    </div>
         
      
     </div>
