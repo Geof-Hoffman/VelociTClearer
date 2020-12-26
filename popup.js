@@ -1,140 +1,154 @@
 $(function () {
-  var states = [
-      {
-          state: 'Attorney',
-          issues: [
-              {
-                  issue: `URT`,
-                  min: 1,
-                  max: 1,
-                  lo: ``,
-                  mo: ``,
-                  tpo: ``,
-                  etic: ``,
-                  ltic: ``,
-                  com: ``
-              },
-              {
-                  issue: `JUDGMENT`,
-                  min: 1,
-                  max: 1,
-                  lo: ``,
-                  mo: ``,
-                  tpo: ``,
-                  etic: ``,
-                  ltic: ``,
-                  com: ``
-              }, {
-                  issue: `tax lien`,
-                  min: 1,
-                  max: 1,
-                  lo: ``,
-                  mo: ``,
-                  tpo: ``,
-                  etic: ``,
-                  ltic: ``,
-                  com: ``
-              }
-          ]
-      },{
-          state: 'Florida',
-          issues: [
-              {
-                  issue: `CMA`,
-                  min: 1,
-                  max: 1,
-                  lo: ``,
-                  mo: ``,
-                  tpo: ``,
-                  etic: ``,
-                  ltic: ``,
-                  com: ``
-              },
-              {
-                  issue: `Survey`,
-                  min: 1,
-                  max: 1,
-                  lo: ``,
-                  mo: ``,
-                  tpo: ``,
-                  etic: ``,
-                  ltic: ``,
-                  com: ``
-              },{
-                  issue: `NOC`,
-                  min: 1,
-                  max: 1,
-                  lo: ``,
-                  mo: ``,
-                  tpo: ``,
-                  etic: ``,
-                  ltic: ``,
-                  com: ``
-              }
-          ]
-      },{
-          state: 'Virginia',
-          issues: [
-              {
-                  issue: `POA`,
-                  min: 1,
-                  max: 1,
-                  lo: ``,
-                  mo: ``,
-                  tpo: ``,
-                  etic: ``,
-                  ltic: ``,
-                  com: ``
-              },
-              {
-                  issue: `HOA`,
-                  min: 1,
-                  max: 1,
-                  lo: ``,
-                  mo: ``,
-                  tpo: ``,
-                  etic: ``,
-                  ltic: ``,
-                  com: ``
-              }, {
-                  issue: `UCC`,
-                  min: 1,
-                  max: 1,
-                  lo: ``,
-                  mo: ``,
-                  tpo: ``,
-                  etic: ``,
-                  ltic: ``,
-                  com: ``
-              }
-          ]
-      }];
-      
-       // displays states in dropdown
-      var output = '';
-      for (var i = 0; i < states.length; i++) {
-          output += '<option>' + states[i].state + '</option>';
-      }
-      document.getElementById('state').innerHTML = output;
-      
-  
-
+  var data = [
+    {
+      state: 'Attorney',
+      issues: [
+        {
+          issue: `URT`,
+          min: 1,
+          max: 1,
+          lo: ``,
+          mo: ``,
+          tpo: ``,
+          etic: ``,
+          ltic: ``,
+          com: ``
+        },
+        {
+          issue: `JUDGMENT`,
+          min: 1,
+          max: 1,
+          lo: ``,
+          mo: ``,
+          tpo: ``,
+          etic: ``,
+          ltic: ``,
+          com: ``
+        }, {
+          issue: `tax lien`,
+          min: 1,
+          max: 1,
+          lo: ``,
+          mo: ``,
+          tpo: ``,
+          etic: ``,
+          ltic: ``,
+          com: ``
+        }
+      ]
+    }, {
+      state: 'Florida',
+      issues: [
+        {
+          issue: `CMA`,
+          min: 1,
+          max: 1,
+          lo: ``,
+          mo: ``,
+          tpo: ``,
+          etic: ``,
+          ltic: ``,
+          com: ``
+        },
+        {
+          issue: `Survey`,
+          min: 1,
+          max: 1,
+          lo: ``,
+          mo: ``,
+          tpo: ``,
+          etic: ``,
+          ltic: ``,
+          com: ``
+        }, {
+          issue: `NOC`,
+          min: 1,
+          max: 1,
+          lo: ``,
+          mo: ``,
+          tpo: ``,
+          etic: ``,
+          ltic: ``,
+          com: ``
+        }
+      ]
+    }, {
+      state: 'Virginia',
+      issues: [
+        {
+          issue: `POA`,
+          min: 1,
+          max: 1,
+          lo: ``,
+          mo: ``,
+          tpo: ``,
+          etic: ``,
+          ltic: ``,
+          com: ``
+        },
+        {
+          issue: `HOA`,
+          min: 1,
+          max: 1,
+          lo: ``,
+          mo: ``,
+          tpo: ``,
+          etic: ``,
+          ltic: ``,
+          com: ``
+        }, {
+          issue: `UCC`,
+          min: 1,
+          max: 1,
+          lo: ``,
+          mo: ``,
+          tpo: ``,
+          etic: ``,
+          ltic: ``,
+          com: ``
+        }
+      ]
+    }];
+   function find(array, criteriaFn) {
+     let current = array
+     let next = []
+     while (current || current === 0) {
+       if (criteriaFn(current)) {
+         return current
+       }
+       if (Array.isArray(current)) {
+         for (let i = 0; i < current.length; i++) {
+           next.push(current[i])
+         }
+       }
+       current = next.shift()
+     }
+     return null;}
  
+  // displays states in dropdown
+  var output = '';
+
+  for (var i = 0; i < data.length; i++) {
+    output += '<option>' + data[i].state + '</option>';
+
+  }
+  document.getElementById('state').innerHTML = output;
+  //puts selected state in variable stateName then searches for issues. 
   $(".state").change(function () {
     var stateName = $(this).val();
-    
-      console.log(stateName);
-
-    var issuesList=[];
+    console.log(stateName);
+    var stateArray = find(data, number => number.state === stateName);
+    var issuesList = stateArray.issues;
     var options = '<option value=""><strong>issues</strong></option>';
-    $(states).each(function (index, value) {
-      
-        options += '<option value="' + value.issue + '">' + value.issue + '</option>';
-      
-    });
+    for (var i = 0; i < issuesList.length; i++) {
+      options += '<option>' + issuesList[i].issue + '</option>';
+    };
+    document.getElementById('issue').innerHTML = options;
 
-    $('.issue').html(options);
+
   });
+
+
 
 
   //toggles divs on and off
@@ -153,7 +167,7 @@ $(function () {
       $(lists[i]).html(i + 1 + ") ");
     }
   }
-  
+
 
   //Click on X to delete Todo
   $("ul").on('click', "span", function (e) {
@@ -182,7 +196,7 @@ $(function () {
       $(this).val("");
     }
   });
- 
+
   //Copy butttons
   var copyLoanOpenBtn = document.querySelector('.copyLoanOpenBtn');
   var copyMemberOpenBtn = document.querySelector('.copyMemberOpenBtn');
@@ -246,18 +260,18 @@ $(function () {
     }
   });
 
-var today = new Date()
-var curHr = today.getHours()
-var timeOfDay = 'Hello';
-if (curHr < 12) {
-  timeOfDay = "Good morning";
-} else if (curHr < 15) {
-  timeOfDay = "Good afternoon";
-} else {
-  timeOfDay = 'Good evening';
-}
-  var LoanOpenDefault = 
-`${timeOfDay},
+  var today = new Date()
+  var curHr = today.getHours()
+  var timeOfDay = 'Hello';
+  if (curHr < 12) {
+    timeOfDay = "Good morning";
+  } else if (curHr < 15) {
+    timeOfDay = "Good afternoon";
+  } else {
+    timeOfDay = 'Good evening';
+  }
+  var LoanOpenDefault =
+    `${timeOfDay},
 I am working on the title portion of this refinance.  `;
   document.getElementById("copyLoanOpen").defaultValue = LoanOpenDefault;
   var MemberOpenDefault = `have a nice day2`;
@@ -270,9 +284,5 @@ I am working on the title portion of this refinance.  `;
   document.getElementById("copyticLoan").defaultValue = ticLoanDefault;
   var commentsDefault = `have a nice day6`;
   document.getElementById("copycomments").defaultValue = commentsDefault;
-
-
-
-
 
 });
