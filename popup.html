@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
     <meta charset="UTF-8">
     <script src="jquery-3.5.1.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -156,11 +157,11 @@
             margin-top: 20px;
         }
 
-        .LenderOpen{background: #0000ff;}
+        .LoanOpen{background: #0000ff;}
         .MemeberOpen{background: #0000ff;}
         .thirdPartyOpen{background: #0000ff;}
         .CTSTIC{background: #0000ff;}
-        .TICLender{background: #0000ff;}
+        .TICLoan{background: #0000ff;}
         .comments{background: #0000ff;}
         input[type="text"] {
             width: 300px;
@@ -186,16 +187,10 @@
     <div>
       
         <div id = "container">
-            <h1>Select state </h1>
+            <h1>Select state <i class="removeall">Clear Issues</i></h1>
              
-            <select class="state">
-                <option> <strong>State</strong></option>
-                <option value="Attorney">Attorney</option>
-                <option value="non-attorney">non-attorney</option>
-                <option value="Florida">Florida</option>
-                <option value="All">All</option>
-            </select>
-            <h1>Add issues<i class="removeall">Clear</i><i class="add">+</i></h1>   
+            <select id="state" class="state">| </select>
+            
            
         <div>
             <select id="issue" class="issue">
@@ -213,38 +208,38 @@
     <h2>Send Email to:</h2>
     <div class="boxes">
        
-        <label>Lender Open<input type="checkbox" name="contactCheckbox" value="lenderOpen"></label><br/>
+        <label>Loan Open<input type="checkbox" name="contactCheckbox" value="LoanOpen"></label><br/>
         <label>Member Open<input type="checkbox" name="contactCheckbox" value="MemberOpen"></label><br/>
    
         <label>3rd-PartyOpen<input type="checkbox" name="contactCheckbox" value="thirdPartyOpen"></label><br/>
         <label>TIC CTS<input type="checkbox" name="contactCheckbox" value="CTSTIC"></label><br/>
 
-        <label>TIC Lender<input type="checkbox" name="contactCheckbox" value="ticLender"></label><br/>
+        <label>TIC Loan<input type="checkbox" name="contactCheckbox" value="ticLoan"></label><br/>
         <label>comments<input type="checkbox" name="contactCheckbox" value="comments"></label><br/>
     </div>
     
-    <div class="lenderOpen box">     
-      <textarea class="copyLoanOpen" style="width:100%;" rows="5"> </textarea>
+    <div class="LoanOpen box">     
+      <textarea class="copyLoanOpen" id="copyLoanOpen" style="width:100%;" rows="5" defaultValue="type here"> </textarea>
       <p><button class="copyLoanOpenBtn">Copy Opening Email to Loan Processor</button></p>
     </div>
     <div class="MemberOpen box">
-      <textarea class="copyMemberOpen" style="width:100%;" rows="5"> </textarea>
+      <textarea class="copyMemberOpen" id="copyMemberOpen" style="width:100%;" rows="5"> </textarea>
       <p><button class="copyMemberOpenBtn">Copy Opening Email to Member</button></p>
     </div>
     <div class="thirdPartyOpen box">
-      <textarea class="thirdPartyOpen" style="width:100%;" rows="5"> </textarea>
+      <textarea class="copythirdPartyOpen" id="copythirdPartyOpen" style="width:100%;" rows="5"> </textarea>
       <p><button class="copythirdPartyOpenBtn">Copy Opening Email to Third Party</button></p>
     </div>
     <div class="CTSTIC box">
-      <textarea class="copyCTSTIC" style="width:100%;" rows="5"> </textarea>
+      <textarea class="copyCTSTIC" id="copyCTSTIC" style="width:100%;" rows="5"> </textarea>
       <p><button class="copyCTSTICBtn">Copy CTS Clear note</button></p>
     </div>
-    <div class="ticLender box">
-      <textarea class="copyticLender" style="width:100%;" rows="5"> </textarea>
-      <p><button class="copyticLenderBtn">CopyTIC note to loan Processor</button></p>
+    <div class="ticLoan box">
+      <textarea class="copyticLoan" id="copyticLoan" style="width:100%;" rows="5"> </textarea>
+      <p><button class="copyticLoanBtn">CopyTIC note to loan Processor</button></p>
     </div>
-    <div class="comments box">
-      <textarea class="copycomments" style="width:100%;" rows="5"> </textarea>      
+    <div class="comments box" >
+      <textarea class="copycomments" id="copycomments" style="width:100%;" rows="5"> </textarea>      
     </div>
         
      

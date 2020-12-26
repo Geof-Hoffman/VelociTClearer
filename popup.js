@@ -1,154 +1,142 @@
 $(function () {
+  var states = [
+      {
+          state: 'Attorney',
+          issues: [
+              {
+                  issue: `URT`,
+                  min: 1,
+                  max: 1,
+                  lo: ``,
+                  mo: ``,
+                  tpo: ``,
+                  etic: ``,
+                  ltic: ``,
+                  com: ``
+              },
+              {
+                  issue: `JUDGMENT`,
+                  min: 1,
+                  max: 1,
+                  lo: ``,
+                  mo: ``,
+                  tpo: ``,
+                  etic: ``,
+                  ltic: ``,
+                  com: ``
+              }, {
+                  issue: `tax lien`,
+                  min: 1,
+                  max: 1,
+                  lo: ``,
+                  mo: ``,
+                  tpo: ``,
+                  etic: ``,
+                  ltic: ``,
+                  com: ``
+              }
+          ]
+      },{
+          state: 'Florida',
+          issues: [
+              {
+                  issue: `CMA`,
+                  min: 1,
+                  max: 1,
+                  lo: ``,
+                  mo: ``,
+                  tpo: ``,
+                  etic: ``,
+                  ltic: ``,
+                  com: ``
+              },
+              {
+                  issue: `Survey`,
+                  min: 1,
+                  max: 1,
+                  lo: ``,
+                  mo: ``,
+                  tpo: ``,
+                  etic: ``,
+                  ltic: ``,
+                  com: ``
+              },{
+                  issue: `NOC`,
+                  min: 1,
+                  max: 1,
+                  lo: ``,
+                  mo: ``,
+                  tpo: ``,
+                  etic: ``,
+                  ltic: ``,
+                  com: ``
+              }
+          ]
+      },{
+          state: 'Virginia',
+          issues: [
+              {
+                  issue: `POA`,
+                  min: 1,
+                  max: 1,
+                  lo: ``,
+                  mo: ``,
+                  tpo: ``,
+                  etic: ``,
+                  ltic: ``,
+                  com: ``
+              },
+              {
+                  issue: `HOA`,
+                  min: 1,
+                  max: 1,
+                  lo: ``,
+                  mo: ``,
+                  tpo: ``,
+                  etic: ``,
+                  ltic: ``,
+                  com: ``
+              }, {
+                  issue: `UCC`,
+                  min: 1,
+                  max: 1,
+                  lo: ``,
+                  mo: ``,
+                  tpo: ``,
+                  etic: ``,
+                  ltic: ``,
+                  com: ``
+              }
+          ]
+      }];
+      
+       // displays states in dropdown
+      var output = '';
+      for (var i = 0; i < states.length; i++) {
+          output += '<option>' + states[i].state + '</option>';
+      }
+      document.getElementById('state').innerHTML = output;
+      
+  
 
-  $(function () {
-    $('#name').keyup(function () {
-      $(".#greet").text()
-    });
-  });
-
-  var issuesArray = [];
-
-
-
-  var series = [
-    {
-      name: 'Attorney', issue: 'A1',
-      lenderOpen: "AA1LO",
-      LenderClear: "AA1LenderClear",
-      TPO: "AA13PO",
-      AtClear: "AA1AtClear",
-      Comments: "AA1Comments"
-    },
-    {
-      name: 'Florida', issue: 'survey',
-      lenderOpen: "FLSLO",
-      LenderClear: "FLSLenderClear",
-      TPO: "FLS3PO",
-      AtClear: "FLSAtClear",
-      Comments: "FLSComments"
-    },
-    {
-      name: 'Florida', issue: 'NOC',
-      lenderOpen: "FLNOCLO",
-      LenderClear: "FLNOCLenderClear",
-      TPO: "FLNOC3PO",
-      AtClear: "FLNOCAtClear",
-      CommentNOC: "FLSComments"
-    },
-    { name: 'Florida', issue: 'Condo-NOC' },
-    { name: 'Florida', issue: 'Marriage Cert' },
-
-    { name: 'Florida', issue: 'PO-Signing Auth' },
-    { name: 'state A', issue: 'A3' },
-    { name: 'Virginia', issue: 'B1' },
-    { name: 'state B', issue: 'B2' },
-    { name: "All", issue: "Borrorer Authorization" },
-    { name: "All", issue: "CMA	" },
-    { name: "All", issue: "Corrective deed" },
-    { name: "All", issue: "Deceased spouse/ death" },
-    { name: "All", issue: "Deed To add" },
-    { name: "All", issue: "deed to add" },
-    { name: "All", issue: "Deed to delete" },
-    { name: "All", issue: "Divorce decree" },
-    { name: "All", issue: "Estate" },
-    { name: "All", issue: "HOA information" },
-    { name: "All", issue: "IRS Lien" },
-    { name: "All", issue: "Judgment" },
-    { name: "All", issue: "Judgment affidavit" },
-    { name: "All", issue: "marriage cert" },
-    { name: "All", issue: "name change" },
-    { name: "All", issue: "No Financing affidavit" },
-    { name: "All", issue: "OTP" },
-    { name: "All", issue: "Possible judgment" },
-    { name: "All", issue: "Power of attorney" },
-    { name: "All", issue: "Prior owner POA aff" },
-    { name: "All", issue: "Prior owner URT" },
-    { name: "All", issue: "PSA" },
-    { name: "All", issue: "Subordination" },
-    { name: "All", issue: "Tax sale" },
-    { name: "All", issue: "UCC" },
-    { name: "All", issue: "URT" },
-    { name: "All", issue: "wife remaining on title" },
-
-  ];
-
-  var statelist = document.getElementById("stateList");
-  //var stateIssues= document.getElementById("stateIssues");
-
-
-  // displays value of state dropdown to selectedState div
+ 
   $(".state").change(function () {
-    var state = $(this).val();
-    var options = '<option value=""><strong>issues</strong></option>';
-    $(series).each(function (index, value) {
-      if (value.name == state) {
-        options += '<option value="' + value.issue + '">' + value.issue + '</option>';
-      }
-    });
-
-    $('.issue').html(options);
-  });
-
-  $(".copy").click(function () {
-    var state = $(this).val();
-    var options = '<option value=""><strong>issues</strong></option>';
-    $(series).each(function (index, value) {
-      if (value.name == state) {
-        options += '<option value="' + value.issue + '">' + value.issue + '</option>';
-      }
-    });
-
-    $('.issue').html(options);
-  });
-
-  $("button#copy").click(function () {
-    text = $(this).val();
-    copyToClipboard(text);
-  });
-
-
-  $(function () {
-    /*    wrapped in function so I can hide it...
-    //creates dropdown options for states from optionsList array, 
-    var optionsList = [{
-        label: "Florida",
-        value: "option-1"
-      },
-      {
-        label: "Attorney",
-        value: "option-2"
-      },
-      {
-        label: "CTS",
-        value: "option-3"
-      },
-      {
-        label: "Virginia",
-        value: "option-4"
-      }
-    ];
+    var stateName = $(this).val();
     
-      optionsList.forEach(function(item, index, array) {
-        var opt = document.createElement("option");
-        opt.text = item.label;
-        opt.value = item.value;
-         statelist.add(opt);
-        });
-      issuesArray.forEach(function(item, index, array) {
-        var opt = document.createElement("option");
-        opt.text = item.label;
-        opt.value = item.value;
-       statelist.add(opt);
-         
+      console.log(stateName);
+
+    var issuesList=[];
+    var options = '<option value=""><strong>issues</strong></option>';
+    $(states).each(function (index, value) {
+      
+        options += '<option value="' + value.issue + '">' + value.issue + '</option>';
+      
     });
-     */
+
+    $('.issue').html(options);
   });
 
-  //  input.addEventListener('#enterText', updateValue);
 
-  //  function updateValue(e) {
-  //  log.textContent = e.target.value;
-  //  }
   //toggles divs on and off
   $(document).ready(function () {
     $('input[type="checkbox"]').click(function () {
@@ -165,11 +153,7 @@ $(function () {
       $(lists[i]).html(i + 1 + ") ");
     }
   }
-  updateNumbers();
-  //Check off Specific Todos By Clicking
-  $("ul").on("click", "li", function () {
-    $(this).toggleClass("completed");
-  });
+  
 
   //Click on X to delete Todo
   $("ul").on('click', "span", function (e) {
@@ -198,55 +182,14 @@ $(function () {
       $(this).val("");
     }
   });
-
-
-
-  /*  
-    //Add new todos with keypress
-    $("#issue").keypress(function(e) {
-      if(e.which === 13) {
-        //grab text
-        var todoText = $(this).val();
-        //append todotext to ul
-        if( $(this).val() !== "") {
-        $("ul").append("<li><span><i class='fa fa-trash'> </i></span>" + "<number></number>" + todoText + "</li>");
-          }
-        updateNumbers();
-        //clear text
-        $(this).val("");
-      }
-    });
-    
-    $(".add").click(function() {
-      $("input[type='text']").fadeToggle(200);
-    });*/
-
-  function PasteString() {
-    var editor = document.getElementById("TemplateSubPage");
-    editor.focus();
-    //  editor.select();
-    document.execCommand('Paste');
-  }
-
-  function CopyString() {
-    var input = document.getElementById("TemplateSubPage");
-    input.focus();
-    // input..select();
-    document.execCommand('Copy');
-    if (document.selection) {
-      document.selection.empty();
-    } else if (window.getSelection) {
-      window.getSelection().removeAllRanges();
-    }
-
-  }
+ 
   //Copy butttons
   var copyLoanOpenBtn = document.querySelector('.copyLoanOpenBtn');
   var copyMemberOpenBtn = document.querySelector('.copyMemberOpenBtn');
   var copythirdPartyOpenBtn = document.querySelector('.copythirdPartyOpenBtn');
   var copyCTSTICBtn = document.querySelector('.copyCTSTICBtn');
-  var copyticLenderBtn = document.querySelector('.copyticLenderBtn');
-//functions that copy textareas to clipboard
+  var copyticLoanBtn = document.querySelector('.copyticLoanBtn');
+  //functions that copy textareas to clipboard
   copyLoanOpenBtn.addEventListener('click', function (event) {
     var copyTextarea = document.querySelector('.copyLoanOpen');
     copyTextarea.select();
@@ -291,8 +234,8 @@ $(function () {
       console.log('Oops, unable to copy');
     }
   });
-  copyticLenderBtn.addEventListener('click', function (event) {
-    var copyTextarea = document.querySelector('.copyticLender');
+  copyticLoanBtn.addEventListener('click', function (event) {
+    var copyTextarea = document.querySelector('.copyticLoan');
     copyTextarea.select();
     try {
       var successful = document.execCommand('copy');
@@ -302,5 +245,34 @@ $(function () {
       console.log('Oops, unable to copy');
     }
   });
+
+var today = new Date()
+var curHr = today.getHours()
+var timeOfDay = 'Hello';
+if (curHr < 12) {
+  timeOfDay = "Good morning";
+} else if (curHr < 15) {
+  timeOfDay = "Good afternoon";
+} else {
+  timeOfDay = 'Good evening';
+}
+  var LoanOpenDefault = 
+`${timeOfDay},
+I am working on the title portion of this refinance.  `;
+  document.getElementById("copyLoanOpen").defaultValue = LoanOpenDefault;
+  var MemberOpenDefault = `have a nice day2`;
+  document.getElementById("copyMemberOpen").defaultValue = MemberOpenDefault;
+  var thirdPartyOpenDefault = `have a nice day3`;
+  document.getElementById("copythirdPartyOpen").defaultValue = thirdPartyOpenDefault;
+  var CTSTICDefault = `have a nice day4`;
+  document.getElementById("copyCTSTIC").defaultValue = CTSTICDefault;
+  var ticLoanDefault = `have a nice day5`;
+  document.getElementById("copyticLoan").defaultValue = ticLoanDefault;
+  var commentsDefault = `have a nice day6`;
+  document.getElementById("copycomments").defaultValue = commentsDefault;
+
+
+
+
 
 });
