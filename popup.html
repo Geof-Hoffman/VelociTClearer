@@ -1,249 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  
-    <meta charset="UTF-8">
-    <script src="jquery-3.5.1.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="popup.js" ></script>
-    <script src="jquery-3.5.1.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500i,700" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>VelociTClearer</title>
-    <style>
-        body, html {
-            background: #2d296b; /* fallback for old browsers */
-          background: -webkit-linear-gradient(to left, #0000ff , lightgray); /* Chrome 10-25, Safari 5.1-6 */
-          background: linear-gradient(to left, #0000ff , lightgray); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-          font-family: 'Roboto', sans-serif;
-            cursor: default;
-          }
-          
-          .removeall {
-            float: right;
-            font-size: 0.4em;
-            margin-right: 0%;
-            line-height: 30px;
-            padding-left: 1em;
-            cursor: pointer;
-          }
-          
-          .add {
-            float:right;
-            cursor: pointer;
-          }
-          .boxes{
-            font-size: 15px;
-            text-align: right;
-            letter-spacing: 1px;
-            background: #538aca;
-            width: 100%;
-            border: none;
-            box-sizing: border-box;
-            padding: 13px 13px 13px 13px;
-            color: white;
-          }
-          
-          #container {
-            background: #538aca;
-            width: 360px;
-            margin: 10px auto;
-            box-shadow: 0 0 3px rgba(0,0,0, 1);
-          }
-          
-          h1 {
-            background: #538aca;
-            color: white;
-            margin: 0;
-            padding: 10px 20px;
-            text-transform: none;
-            font-size: 24px;
-            font-weight: normal;
-          }
-          
-          ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-          }
-          
-          li {
-            background: #538aca;
-            max-height: 400px;
-            line-height: 40px;
-            color:  lightgray;
-          }
-          
-          li:nth-child(2n) {
-            background: #0455b1;
-          }
-          select {
-            font-size: 15px;
-            text-align: center;
-            letter-spacing: 1px;
-            background: #0455b1;
-            width: 100%;
-            border: none;
-            box-sizing: border-box;
-            padding: 13px 13px 13px 13px;
-            color: white;
-          } 
-          
-          input {
-            font-size: 15px;
-            text-align: center;
-            letter-spacing: 1px;
-            background: #538aca;
-            width: 50%;
-            border: none;
-            box-sizing: border-box;
-            padding: 13px 13px 13px 13px;
-            color: white;
-          }
-                  
-          input:focus {
-            background: #0455b1;
-            outline:none;
-            border: 2px solid #0455b1;
-            color: white;
-          }
-          .completed {
-            text-decoration: line-through;
-            color: gray;
-          }
-          
-          li:hover {
-            cursor: pointer;
-          }
-          
-          span {
-            background: #470275;
-            height: 40px;
-            margin-right: 20px;
-            text-align: center;
-            color: white;
-            width: 0px;
-            display: inline-block;
-            transition: 0.2s linear;
-            opacity: 0;
-          }
-          
-          li:hover span {
-            width: 40px;
-            opacity: 1;
-          }
-          
-          ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-              color:    lightgray;
-          }
-          :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-             color:    lightgray;
-             opacity:  1;
-          }
-          ::-moz-placeholder { /* Mozilla Firefox 19+ */
-             color:    lightgray;
-             opacity:  1;
-          }
-          :-ms-input-placeholder { /* Internet Explorer 10-11 */
-             color:    lightgray;
-          }
-        
-        .box{
-            color: #fff;
-            padding: 20px;
-            display: none;
-            margin-top: 20px;
-        }
+  <meta charset="UTF-8">
+  <script src="jquery-3.5.1.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="popup.js"></script>
+  <script src="jquery-3.5.1.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500i,700" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        .LoanOpen{background: #0000ff;}
-        .MemeberOpen{background: #0000ff;}
-        .thirdPartyOpen{background: #0000ff;}
-        .CTSTIC{background: #0000ff;}
-        .TICLoan{background: #0000ff;}
-        .comments{background: #0000ff;}
-        input[type="text"] {
-            width: 300px;
-            height: 20px;
-            padding-right: 50px;
-        }
-        
-        input[type="submit"] {
-            margin-left: -50px;
-            height: 25px;
-            width: 50px;
-            background: blue;
-            color: white;
-            border: 0;
-            -webkit-appearance: none;
-        }
-    </style>
+  <title>VelociTClearer</title>
+  <style>
+    body,
+    html {
+      background: #2d296b;
+      /* fallback for old browsers */
+      background: -webkit-linear-gradient(to left, #0000ff, lightgray);
+      /* Chrome 10-25, Safari 5.1-6 */
+      background: linear-gradient(to left, #0000ff, lightgray);
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      font-family: 'Roboto', sans-serif;
+      cursor: default;
+    }
+
+    .removeall {
+      float: right;
+      font-size: 0.4em;
+      margin-right: 0%;
+      line-height: 30px;
+      padding-left: 1em;
+      cursor: pointer;
+    }
+
+    .add {
+      float: right;
+      cursor: pointer;
+    }
+
+    .boxes {
+      font-size: 15px;
+      text-align: right;
+      letter-spacing: 1px;
+      background: #538aca;
+      width: 100%;
+      border: none;
+      box-sizing: border-box;
+      padding: 13px 13px 13px 13px;
+      color: white;
+    }
+
+    #container {
+      background: #538aca;
+      width: 360px;
+      margin: 10px auto;
+      box-shadow: 0 0 3px rgba(0, 0, 0, 1);
+    }
+
+    h1 {
+      background: #538aca;
+      color: white;
+      margin: 0;
+      padding: 10px 20px;
+      text-transform: none;
+      font-size: 24px;
+      font-weight: normal;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      background: #538aca;
+      max-height: 400px;
+      line-height: 40px;
+      color: lightgray;
+    }
+
+    li:nth-child(2n) {
+      background: #0455b1;
+    }
+
+    select {
+      font-size: 15px;
+      text-align: center;
+      letter-spacing: 1px;
+      background: #0455b1;
+      width: 100%;
+      border: none;
+      box-sizing: border-box;
+      padding: 13px 13px 13px 13px;
+      color: white;
+    }
+
+    input {
+      font-size: 15px;
+      text-align: center;
+      letter-spacing: 1px;
+      background: #538aca;
+      width: 50%;
+      border: none;
+      box-sizing: border-box;
+      padding: 13px 13px 13px 13px;
+      color: white;
+    }
+
+    input:focus {
+      background: #0455b1;
+      outline: none;
+      border: 2px solid #0455b1;
+      color: white;
+    }
+
+    .completed {
+      text-decoration: line-through;
+      color: gray;
+    }
+
+    li:hover {
+      cursor: pointer;
+    }
+
+    span {
+      background: #470275;
+      height: 40px;
+      margin-right: 20px;
+      text-align: center;
+      color: white;
+      width: 0px;
+      display: inline-block;
+      transition: 0.2s linear;
+      opacity: 0;
+    }
+
+    li:hover span {
+      width: 40px;
+      opacity: 1;
+    }
+
+    ::-webkit-input-placeholder {
+      /* WebKit, Blink, Edge */
+      color: lightgray;
+    }
+
+    :-moz-placeholder {
+      /* Mozilla Firefox 4 to 18 */
+      color: lightgray;
+      opacity: 1;
+    }
+
+    ::-moz-placeholder {
+      /* Mozilla Firefox 19+ */
+      color: lightgray;
+      opacity: 1;
+    }
+
+    :-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: lightgray;
+    }
+
+    .box {
+      color: #fff;
+      padding: 20px;
+      display: none;
+      margin-top: 20px;
+    }
+
+    .LoanOpen {
+      background: #0000ff;
+    }
+
+    .MemeberOpen {
+      background: #0000ff;
+    }
+
+    .thirdPartyOpen {
+      background: #0000ff;
+    }
+
+    .CTSTIC {
+      background: #0000ff;
+    }
+
+    .TICLoan {
+      background: #0000ff;
+    }
+
+    .comments {
+      background: #0000ff;
+    }
+
+    input[type="text"] {
+      width: 300px;
+      height: 20px;
+      padding-right: 50px;
+    }
+
+    input[type="submit"] {
+      margin-left: -50px;
+      height: 25px;
+      width: 50px;
+      background: blue;
+      color: white;
+      border: 0;
+      -webkit-appearance: none;
+    }
+  </style>
 </head>
+
 <body>
-    <h1  >VelociT-Clearer</h1>
-    
-    
+  <h1>VelociT-Clearer</h1>
+  <div>
+    <div id="container">
+      <h1>Select state <i class="removeall">Clear Issues</i></h1>
+      <select id="state" class="state">| </select>
     <div>
-      
-        <div id = "container">
-            <h1>Select state <i class="removeall">Clear Issues</i></h1>
-             
-            <select id="state" class="state">| </select>
-            
-           
-        <div>
-            <select id="issue" class="issue">
-                
-            </select>
-        </div>
-              <ul >
-              
-            </ul>
-         </div>
+      <select id="issue" class="issue"></select>
     </div>
+      <ul id ="sortable"></ul>
+    </div>
+  </div>
 
 
-   
-    <h2>Send Email to:</h2>
-    <div class="boxes">
-       
-        <label>Loan Open<input type="checkbox" name="contactCheckbox" value="LoanOpen"></label><br/>
-        <label>Member Open<input type="checkbox" name="contactCheckbox" value="MemberOpen"></label><br/>
-   
-        <label>3rd-PartyOpen<input type="checkbox" name="contactCheckbox" value="thirdPartyOpen"></label><br/>
-        <label>TIC CTS<input type="checkbox" name="contactCheckbox" value="CTSTIC"></label><br/>
 
-        <label>TIC Loan<input type="checkbox" name="contactCheckbox" value="ticLoan"></label><br/>
-        <label>comments<input type="checkbox" name="contactCheckbox" value="comments"></label><br/>
-    </div>
-    
-    <div class="LoanOpen box">     
-      <textarea class="copyLoanOpen" id="copyLoanOpen" style="width:100%;" rows="5" defaultValue="type here"> </textarea>
-      <p><button class="copyLoanOpenBtn">Copy Opening Email to Loan Processor</button></p>
-    </div>
-    <div class="MemberOpen box">
-      <textarea class="copyMemberOpen" id="copyMemberOpen" style="width:100%;" rows="5"> </textarea>
-      <p><button class="copyMemberOpenBtn">Copy Opening Email to Member</button></p>
-    </div>
-    <div class="thirdPartyOpen box">
-      <textarea class="copythirdPartyOpen" id="copythirdPartyOpen" style="width:100%;" rows="5"> </textarea>
-      <p><button class="copythirdPartyOpenBtn">Copy Opening Email to Third Party</button></p>
-    </div>
-    <div class="CTSTIC box">
-      <textarea class="copyCTSTIC" id="copyCTSTIC" style="width:100%;" rows="5"> </textarea>
-      <p><button class="copyCTSTICBtn">Copy CTS Clear note</button></p>
-    </div>
-    <div class="ticLoan box">
-      <textarea class="copyticLoan" id="copyticLoan" style="width:100%;" rows="5"> </textarea>
-      <p><button class="copyticLoanBtn">CopyTIC note to loan Processor</button></p>
-    </div>
-    <div class="comments box" >
-      <textarea class="copycomments" id="copycomments" style="width:100%;" rows="5"> </textarea>      
-    </div>
-        
-     
-    </div>
+  <h2>Send Email to:</h2>
+  <div class="boxes">
+
+    <label>Loan Open<input type="checkbox" name="contactCheckbox" value="LoanOpen"></label><br />
+    <label>Member Open<input type="checkbox" name="contactCheckbox" value="MemberOpen"></label><br />
+
+    <label>3rd-PartyOpen<input type="checkbox" name="contactCheckbox" value="thirdPartyOpen"></label><br />
+    <label>TIC CTS<input type="checkbox" name="contactCheckbox" value="CTSTIC"></label><br />
+
+    <label>TIC Loan<input type="checkbox" name="contactCheckbox" value="ticLoan"></label><br />
+    <label>comments<input type="checkbox" name="contactCheckbox" value="comments"></label><br />
+  </div>
+
+  <div class="LoanOpen box">
+    <textarea class="copyLoanOpen" id="copyLoanOpen" style="width:100%;" rows="5" defaultValue="type here"> </textarea>
+    <p><button class="copyLoanOpenBtn">Copy Opening Email to Loan Processor</button></p>
+  </div>
+  <div class="MemberOpen box">
+    <textarea class="copyMemberOpen" id="copyMemberOpen" style="width:100%;" rows="5"> </textarea>
+    <p><button class="copyMemberOpenBtn">Copy Opening Email to Member</button></p>
+  </div>
+  <div class="thirdPartyOpen box">
+    <textarea class="copythirdPartyOpen" id="copythirdPartyOpen" style="width:100%;" rows="5"> </textarea>
+    <p><button class="copythirdPartyOpenBtn">Copy Opening Email to Third Party</button></p>
+  </div>
+  <div class="CTSTIC box">
+    <textarea class="copyCTSTIC" id="copyCTSTIC" style="width:100%;" rows="5"> </textarea>
+    <p><button class="copyCTSTICBtn">Copy CTS Clear note</button></p>
+  </div>
+  <div class="ticLoan box">
+    <textarea class="copyticLoan" id="copyticLoan" style="width:100%;" rows="5"> </textarea>
+    <p><button class="copyticLoanBtn">CopyTIC note to loan Processor</button></p>
+  </div>
+  <div class="comments box">
+    <textarea class="copycomments" id="copycomments" style="width:100%;" rows="5"> </textarea>
+  </div>
+
+
+  </div>
+
+  <button id="pushButton">Add elements</button> 
+  
+  <p id="geeks"></p> 
 
 </body>
+
 </html>
