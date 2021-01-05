@@ -1,31 +1,87 @@
 $(function () {
-  var data = [
+  function upDateInfo() {
+    chrome.storage.sync.get('storedData', function (results) {
+      if (results.storedData !== data) {
+        chrome.storage.sync.get('storedData', function (results) {
+          data = results.storedData;
+          console.log('State info updated from storage to:')
+          console.log(data);
+          displayDrops();
+          console.log("storedData");
+        });
+      } else {
+        data = defaultData;
+        displayDrops();
+        console.log('defaultData');
+      }
+    })
+
+  };
+  upDateInfo();
+  var data = [];
+  var defaultData = [
     {
       state: 'Attorney',
       issues: [
         {
           issue: `URT`,
-          min: 1,
-          max: 1,
-          lo: `Attorney-URT-LO`,
-          mo: `Attorney-URT-mo`,
-          tpo: `Attorney-URT-tpo`,
-          etic: `Attorney-URT-etic`,
-          ltic: `Attorney-URT-ltic`,
-          com: `Attorney-URT-com`
+          min: 5,
+          max: 15,
+          lo: `an unreleased mortgage was found and will need to be released by the prior lender before proceeding. `,
+          mo: `an unreleased mortgage was found and will need to be released by the prior lender before proceeding. Please search your records for an unrecorded release, "paid in full" letter, or other document showing that the attached mortgage was paid in full. `,
+          tpo: `The attached mortgage to your company was returned with the title search. Our records indicate that it was previously paid in full but we were unable to locate a release in land records. \n\nAttached is a copy of your unrleased mortgage, our commitment and the borrower's authorization. Please prepare a release, email a copy to me, then send it to the county to be recorded as soon as you are able.\n\n`,
+          etic: `-A release has been received/ #recorded for the unreleased mortgage showing on title. /#Please record release at closing.`,
+          ltic: `-A release has been receive for the unreleased mortgage showing on title. This requirment will not appear on the final policy.`,
+          com: `-Check SOL sheet for statutory experiation\n`
         },
         {
           issue: `JUDGMENT`,
+          min: 5,
+          max: 10,
+          lo: `A judgment was returned with the title search and will need to be paid and/or released prior prior to or at closing.`,
+          mo: `the attached judgment was returned with the title search and will need to be paid and/or released prior prior to or at closing. IF this was previously resolved please forward proof of payment. If you hav an unrecorded satisfaction, we may be able to record it with this transaction. Please forward any pertinent documents or information concerning the judgment to me so that I can contact the judgment holder to resolve the judgment and rleease the lien.`,
+          tpo: `Navy Federal Title Services is working on a refinance of the above property. The attached judgment lien was returned with the title searchand will need to be resolved. \n\n Attached is a copy of your judgment, our commitment and the borrower's authorization. Please provide a payoff or, if the judgment was prevously paid, prepare a release, email a copy to me, then send it to the county to be recorded as soon as you are able. \nPlease let me know if you have any questions or if I can be of any assitance. \n Thank you in advance for your help resolving this issue.\nSincerely,\n\n`,
+          etic: `-A release has been received/ #recorded for the judgment showing on title. /#Please record release at closing. OR Attorney to collect for judgment payoff at closing.\n\n`,
+          ltic: `A payoff has been recieved for the jdugment showing on title, to be paid and released in closing. OR A release was received for the judgment lien showing on title.`,
+          com: `Judgment expriation comments here`
+        }, {
+          issue: `TAX LIEN`,
           min: 1,
           max: 1,
-          lo: `Attorney-JUDGMENT-lo`,
-          mo: `Attorney-JUDGMENT-MO`,
-          tpo: `Attorney-JUDGMENT-tpo`,
-          etic: `Attorney-JUDGMENT-etic`,
-          ltic: `Attorney-JUDGMENT-ltic`,
-          com: `Attorney-JUDGMENT-com`
+          lo: `Attorney-Tax lien-tax lien`,
+          mo: `Attorney-Tax lien-tax lien`,
+          tpo: `Attorney-Tax lien-tax lien`,
+          etic: `Attorney-Tax lien-tax lien`,
+          ltic: `Attorney-Tax lien-tax lien`,
+          com: `Attorney-Tax lien-tax lien`
+        }
+      ]
+    }, {
+      state: 'Escrow',
+      issues: [
+        {
+          issue: `URT`,
+          min: 5,
+          max: 15,
+          lo: `an unreleased mortgage was found and will need to be released by the prior lender before proceeding. `,
+          mo: `an unreleased mortgage was found and will need to be released by the prior lender before proceeding. Please search your records for an unrecorded release, "paid in full" letter, or other document showing that the attached mortgage was paid in full. `,
+          tpo: `The attached mortgage to your company was returned with the title search. Our records indicate that it was previously paid in full but we were unable to locate a release in land records. \n\nAttached is a copy of your unrleased mortgage, our commitment and the borrower's authorization. Please prepare a release, email a copy to me, then send it to the county to be recorded as soon as you are able.\n\n`,
+          etic: `-A release has been received/ #recorded for the unreleased mortgage showing on title. /#Please record release at closing.`,
+          ltic: `-A release has been receive for the unreleased mortgage showing on title. This requirment will not appear on the final policy.`,
+          com: `-Check SOL sheet for statutory experiation\n`
+        },
+        {
+          issue: `JUDGMENT`,
+          min: 5,
+          max: 10,
+          lo: `A judgment was returned with the title search and will need to be paid and/or released prior prior to or at closing.`,
+          mo: `the attached judgment was returned with the title search and will need to be paid and/or released prior prior to or at closing. IF this was previously resolved please forward proof of payment. If you hav an unrecorded satisfaction, we may be able to record it with this transaction. Please forward any pertinent documents or information concerning the judgment to me so that I can contact the judgment holder to resolve the judgment and rleease the lien.`,
+          tpo: `Navy Federal Title Services is working on a refinance of the above property. The attached judgment lien was returned with the title searchand will need to be resolved. \n\n Attached is a copy of your judgment, our commitment and the borrower's authorization. Please provide a payoff or, if the judgment was prevously paid, prepare a release, email a copy to me, then send it to the county to be recorded as soon as you are able. \nPlease let me know if you have any questions or if I can be of any assitance. \n Thank you in advance for your help resolving this issue.\nSincerely,\n\n`,
+          etic: `-A release has been received/ #recorded for the judgment showing on title. /#Please record release at closing. OR Attorney to collect for judgment payoff at closing.\n\n`,
+          ltic: `A payoff has been recieved for the jdugment showing on title, to be paid and released in closing. OR A release was received for the judgment lien showing on title.`,
+          com: `Judgment expriation comments here`
         }, {
-          issue: `tax lien`,
+          issue: `TAX LIEN`,
           min: 1,
           max: 1,
           lo: `Attorney-Tax lien-tax lien`,
@@ -126,35 +182,43 @@ $(function () {
     return null;
   }
 
-  // displays states in dropdown
-  var output = '<option value=""><strong>choose state</strong></option>';
-
-  for (var i = 0; i < data.length; i++) {
-    output += '<option>' + data[i].state + '</option>';
-  }
-  
-  document.getElementById('state').innerHTML = output;
-
-  //puts selected state in variable stateName then outputs state issues to dropdown. 
-  var stateName = $(".state").change(function () {
+  var issuesList = [];
+  function updateState(stateName) {
     $("li").fadeOut(500, function () {
       $(this).remove();
       clearIssues();
     });
-    var stateName = $(this).val();
-    //console.log(stateName);
+
     var stateArray = find(data, number => number.state === stateName);
-    // console.log(stateArray);
-    var issuesList = stateArray.issues; //array of objects containing all the selected state issues and statement values. 
-    //  console.log(issuesList);
+    issuesList = stateArray.issues; //array of objects containing all the selected state issues and statement values. 
     var options = '<option value=""><strong>issues</strong></option>';
     for (var i = 0; i < issuesList.length; i++) {
       options += '<option>' + issuesList[i].issue + '</option>';
     };
     document.getElementById('issue').innerHTML = options;
-    return stateName, issuesList;
+  };
+
+  function displayDrops() {
+    // displays states in dropdown
+    var output = '<option value=""><strong>choose state</strong></option>';
+
+    for (var i = 0; i < data.length; i++) {
+      output += '<option>' + data[i].state + '</option>';
+    }
+
+    document.getElementById('state').innerHTML = output;
+  };
+  displayDrops();
+  //puts selected state in variable stateName then outputs state issues to dropdown. 
+  var stateName = '';
+  var IssueList = [];
+  var IssueObj = [];
+
+  $(".state").change(function () {
+    stateName = $(this).val();
+    updateState(stateName);
   });
-  console.log(stateName)
+
 
   //toggles divs on and off
   $(document).ready(function () {
@@ -165,11 +229,17 @@ $(function () {
   });
 
   var IssueList = [];
+  var IssueObj = [];
 
   function addIssue(e) {
     IssueList.push(e)
-    //console.log(IssueList.length);
+    IssueObj.push(issuesList[issuesList.findIndex(data => data.issue === e)]);
+    // console.log(stateName);
+    // console.log(issuesList);
+    // console.log(IssueObj);
+    dialog();
   };
+
   function clearIssues() {
     for (i = 0; i < IssueList.length; i++) {
       IssueList.pop(i);
@@ -210,7 +280,7 @@ $(function () {
       $("ul").append("<li><span><i class='fa fa-trash'> </i></span>" + "<number></number>" + todoText + "</li>");
       addIssue(todoText);
 
-    
+
       updateNumbers();
       //clear text
       $(this).val("");
@@ -290,42 +360,146 @@ $(function () {
   } else {
     timeOfDay = 'Good evening';
   }
-  var issueNumberIntro = IssueList.length <= 1 ? "one" : "more than 1";
-  console.log(IssueList.length)
-
-  //'An issue was discovered during the title search for this transaction.': 'Some issues were discovered during the title search for this transaction. First, '  ;
-  var secondissueverbiage = '';
-  var expectedcleardate = '';
-  var Finalissueverbiage = '';
 
 
+  function dialog() {
+    var LoanOpenDefault = '';
 
-  var LoanOpenDefault =
-    `${timeOfDay},
 
-  I am the title-clearer working to clear title for this refinance. ${issueNumberIntro} `;
-  /*I will be reaching out to the necessary parties to resolve these issues and expect that all issues will be addressed by ${expectedcleardate}. If you speak to the member, pelase let them know that we may be contacting them for additional information. Please do not ask that they reach out to any third parties to attempt to resolve these issues on there own, as requests from multiple parties can often times cause confusion or delays.
-      
-      As soon as title is clear, I will email you to advise. Please feel free to reach out to me directly with any questions or if I can be of any assistance. 
-      
-      Thank you,*/
-  document.getElementById("copyLoanOpen").defaultValue = LoanOpenDefault;
+   // var expectedcleardate = today + 4;
+    switch (IssueObj.length) {
+      case 1:
+       LoanOpenDefault  = `${timeOfDay},
+
+I am working on the title portion of this refinance. During the review of the title search, ${IssueObj[0].lo}\n
+I will be reaching out to the necessary parties to resolve this issue and expect that title will be clear by TODAYS DATE PLUS MAX DATE. If you speak to the member, please let them know that we may be contacting them for additional information. As soon as title is clear, I will email you to advise.\n\n Please feel free to reach out to me directly with any questions or if I can be of any assistance.\n\nThank you,`
+        MemberOpenDefault = `${timeOfDay},
+
+I am working on the title portion of your refinance. During the review of the title to your property, ${IssueObj[0].mo}\n
+I will be reaching out to the necessary parties to resolve this issue, and will contact you if additional information or your assitance is needed. As soon as title is clear, I will email you and your loan processor at NFCU to advise.\n\n Please feel free to reach out to me directly with any questions or if I can be of any assistance.\n\nThank you,`
+        thirdPartyOpenDefault = `${timeOfDay},
+
+Navy Federal title services is working on a refinance of the above property. ${IssueObj[0].tpo}\n
+Please feel free to contact me with any questions or if I can be of any assistance. Thank you in advance for your help  resolving this issue.\n\nSincerely,\n\n`;
+
+        CTSTICDefault = `- ${IssueObj[0].etic}`;
+
+        ticLoanDefault = `- ${IssueObj[0].ltic}`;
+
+        commentsDefault = `- ${IssueObj[0].com}`;
+
+        break;
+      case 2:
+        LoanOpenDefault = `${timeOfDay},
+
+I am working on the title portion of this refinance. During the review of the title search, ${IssueObj[0].lo}\n
+Also, ${IssueObj[1].lo}\n
+I will be reaching out to the necessary parties to resolve this issue and expect that title will be clear by ${expectedcleardate}. If you speak to the member, please let them know that we may be contacting them for additional information. As soon as title is clear, I will email you to advise.\n\n Please feel free to reach out to me directly with any questions or if I can be of any assistance.\n\nThank you,`
+        MemberOpenDefault = `${timeOfDay},
+
+I am working on the title portion of your refinance. During the review of the title to your property, ${IssueObj[0].mo}\n
+Also, ${IssueObj[1].mo}\n
+I will be reaching out to the necessary parties to resolve this issue, and will contact you if additional information or your assitance is needed. As soon as title is clear, I will email you and your loan processor at NFCU to advise.\n\n Please feel free to reach out to me directly with any questions or if I can be of any assistance.\n\nThank you,`
+        thirdPartyOpenDefault = `${timeOfDay},
+
+Navy Federal title services is working on a refinance of the above property. ${IssueObj[0].tpo}\n
+Please feel free to contact me with any questions or if I can be of any assistance. Thank you in advance for your help resolving this issue.\n\nSincerely,\n\n`;
+
+        CTSTICDefault = `- ${IssueObj[0].etic}\n\n- ${IssueObj[1].etic}`;
+
+        ticLoanDefault = `- ${IssueObj[0].ltic}\n\n- ${IssueObj[1].ltic}`;
+
+        commentsDefault = `- ${IssueObj[0].com}\n\n- ${IssueObj[1].com}`;
+
+        break;
+
+      case 3:
+        LoanOpenDefault = `${timeOfDay},
+
+I am working on the title portion of this refinance. During the review of the title search, ${IssueObj[0].lo}\n
+Also, ${IssueObj[1].lo}\n
+In addition,${IssueObj[2].lo}\n
+I will be reaching out to the necessary parties to resolve this issue and expect that title will be clear by ${expectedcleardate}. If you speak to the member, please let them know that we may be contacting them for additional information. As soon as title is clear, I will email you to advise.\n\nPlease feel free to reach out to me directly with any questions or if I can be of any assistance.\n\nThank you,`
+        MemberOpenDefault = `${timeOfDay},
+
+I am working on the title portion of your refinance. During the review of the title to your property, ${IssueObj[0].mo}\n
+Also, ${IssueObj[1].mo}\n
+In addition, ${IssueObj[2].mo}\n
+I will be reaching out to the necessary parties to resolve this issue, and will contact you if additional information or your assitance is needed. As soon as title is clear, I will email you and your loan processor at NFCU to advise.\n\n Please feel free to reach out to me directly with any questions or if I can be of any assistance.\n\nThank you,`
+        thirdPartyOpenDefault = `${timeOfDay},
+
+Navy Federal title services is working on a refinance of the above property. ${IssueObj[0].tpo}\n
+Please feel free to contact me with any questions or if I can be of any assistance. Thank you in advance for your help resolving this issue.\n\nSincerely,\n\n`;
+
+        CTSTICDefault = `- ${IssueObj[0].etic}\n\n- ${IssueObj[1].etic}\n\n- ${IssueObj[2].etic}`;
+
+        ticLoanDefault = `- ${IssueObj[0].ltic}\n\n- ${IssueObj[1].ltic}\n\n- ${IssueObj[2].ltic}`;
+
+        commentsDefault = `- ${IssueObj[0].com}\n\n- ${IssueObj[1].com}\n\n- ${IssueObj[2].com}`;
+        break;
+      case 4:
+        LoanOpenDefault = `${timeOfDay},
+
+I am working on the title portion of this refinance. During the review of the title search, ${IssueObj[0].lo}\n
+Also, ${IssueObj[1].lo}\n
+In addition,${IssueObj[2].lo}\n
+Finally, ${IssueObj[3].lo}\n
+I will be reaching out to the necessary parties to resolve this issue and expect that title will be clear by ${expectedcleardate}. If you speak to the member, please let them know that we may be contacting them for additional information. As soon as title is clear, I will email you to advise.\n\n Please feel free to reach out to me directly with any questions or if I can be of any assistance.\n\nThank you,`
+        MemberOpenDefault = `${timeOfDay},
+
+I am working on the title portion of your refinance. During the review of the title to your property, ${IssueObj[0].mo}\n
+Also, ${IssueObj[1].mo}\n
+In addition, ${IssueObj[2].mo}\n
+Finally, ${IssueObj[3].mo}\n
+I will be reaching out to the necessary parties to resolve this issue, and will contact you if additional information or your assitance is needed. As soon as title is clear, I will email you and your loan processor at NFCU to advise.\n\n Please feel free to reach out to me directly with any questions or if I can be of any assistance.\n\nThank you,`
+        thirdPartyOpenDefault = `${timeOfDay},
+
+Navy Federal title services is working on a refinance of the above property. ${IssueObj[0].tpo}\n
+Please feel free to contact me with any questions or if I can be of any assistance. Thank you in advance for your help resolving this issue.\n\nSincerely,\n\n`;
+
+        CTSTICDefault = `- ${IssueObj[0].etic}\n\n- ${IssueObj[1].etic}\n\n- ${IssueObj[2].etic}\n\n- ${IssueObj[3].etic}`;
+
+        ticLoanDefault = `- ${IssueObj[0].ltic}\n\n- ${IssueObj[1].ltic}\n\n- ${IssueObj[2].ltic}\n\n- ${IssueObj[3].ltic}`;
+
+        commentsDefault = `- ${IssueObj[0].com}\n\n- ${IssueObj[1].com}\n\n- ${IssueObj[2].com}\n\n- ${IssueObj[3].com}`;
+        break;
+      default:
+        LoanOpenDefault = `Issues have exceeded 4. Please delete some. Thanks!`;
+        MemberOpenDefault = `Issues have exceeded 4. Please delete some. Thanks!`;
+
+        thirdPartyOpenDefault = `Issues have exceeded 4. Please delete some. Thanks!`;
+
+        CTSTICDefault = `Issues have exceeded 4. Please delete some. Thanks!`;
+
+        ticLoanDefault = `Issues have exceeded 4. Please delete some. Thanks!`;
+
+        commentsDefault = `Issues have exceeded 4. Please delete some. Thanks!`;
+      // code block
+    }
+
+
+    document.getElementById("copyLoanOpen").defaultValue = LoanOpenDefault;
+    document.getElementById("copyMemberOpen").defaultValue = MemberOpenDefault;
+    document.getElementById("copythirdPartyOpen").defaultValue = thirdPartyOpenDefault;
+    document.getElementById("copyCTSTIC").defaultValue = CTSTICDefault;
+    document.getElementById("copyticLoan").defaultValue = ticLoanDefault;
+    document.getElementById("copycomments").defaultValue = commentsDefault;
+  };
+
   var MemberOpenDefault = `have a nice day2`;
-  document.getElementById("copyMemberOpen").defaultValue = MemberOpenDefault;
+
   var thirdPartyOpenDefault = `have a nice day3`;
-  document.getElementById("copythirdPartyOpen").defaultValue = thirdPartyOpenDefault;
+
   var CTSTICDefault = `have a nice day4`;
-  document.getElementById("copyCTSTIC").defaultValue = CTSTICDefault;
+
   var ticLoanDefault = `have a nice day5`;
-  document.getElementById("copyticLoan").defaultValue = ticLoanDefault;
+
   var commentsDefault = `have a nice day6`;
-  document.getElementById("copycomments").defaultValue = commentsDefault;
+
 
 });
 
-/*
 
-for each selected issued, data.state.issue[indexOfSelectedIssue].|*/
 
 
 

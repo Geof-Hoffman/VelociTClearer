@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <script src="jquery-3.5.1.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="options.js"></script>
+  <script src="jquery-3.5.1.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500i,700" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>VelociTClearer</title>
+<style>
+    body,
+    html {
+      background: white;
+      /* fallback for old browsers */
+      /*background: -webkit-linear-gradient(to left, #0000ff, lightgray);
+      /* Chrome 10-25, Safari 5.1-6 */
+      /*background: linear-gradient(to left, #0000ff, lightgray);
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      font-family: 'Roboto', sans-serif;
+      cursor: default;
+    }
+
+    .removeall {
+      float: right;
+      font-size: 0.4em;
+      margin-right: 0%;
+      line-height: 30px;
+      padding-left: 1em;
+      cursor: pointer;
+    }
+
+    .add {
+      float: right;
+      cursor: pointer;
+    }
+
+    .boxes {
+      font-size: 15px;
+      text-align: right;
+      letter-spacing: 1px;
+      background: #538aca;
+      width: 100%;
+      border: none;
+      box-sizing: border-box;
+      padding: 13px 13px 13px 13px;
+      color: white;
+    }
+
+    #container {
+      background: #538aca;
+      width: 360px;
+      margin: 10px auto;
+      box-shadow: 0 0 3px rgba(0, 0, 0, 1);
+    }
+    p {
+      background: #538aca;
+      color: white;
+      margin: 0;
+      padding: 5px 0px;
+      text-transform: none;
+      font-size: 16px;
+      font-weight: normal;
+    }
+    button {
+      background: #0455b1;
+      outline: none;
+      border: 20px solid #0455b1;
+      color: white;
+      border-radius: 4px;
+    }
+
+    h1 {
+      background: #538aca;
+      color: white;
+      margin: 0;
+      padding: 10px 20px;
+      text-transform: none;
+      font-size: 24px;
+      font-weight: normal;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      background: #538aca;
+      max-height: 400px;
+      line-height: 40px;
+      color: lightgray;
+    }
+
+    li:nth-child(2n) {
+      background: #0455b1;
+    }
+
+    select {
+      font-size: 15px;
+      text-align: center;
+      letter-spacing: 1px;
+      background: #0455b1;
+      width: 100%;
+      border: none;
+      box-sizing: border-box;
+      padding: 13px 13px 13px 13px;
+      color: white;
+    }
+
+    input {
+      font-size: 15px;
+      text-align: center;
+      letter-spacing: 1px;
+      background: #538aca;
+      width: 50%;
+      border: none;
+      box-sizing: border-box;
+      padding: 13px 13px 13px 13px;
+      color: white;
+    }
+
+    input:focus {
+      background: #0455b1;
+      outline: none;
+      border: 2px solid #0455b1;
+      color: white;
+    }
+
+    .completed {
+      text-decoration: line-through;
+      color: gray;
+    }
+
+    li:hover {
+      cursor: pointer;
+    }
+
+    span {
+      background: #470275;
+      height: 40px;
+      margin-right: 20px;
+      text-align: center;
+      color: white;
+      width: 0px;
+      display: inline-block;
+      transition: 0.2s linear;
+      opacity: 0;
+    }
+
+    li:hover span {
+      width: 40px;
+      opacity: 1;
+    }
+
+    ::-webkit-input-placeholder {
+      /* WebKit, Blink, Edge */
+      color: lightgray;
+    }
+
+    :-moz-placeholder {
+      /* Mozilla Firefox 4 to 18 */
+      color: lightgray;
+      opacity: 1;
+    }
+
+    ::-moz-placeholder {
+      /* Mozilla Firefox 19+ */
+      color: lightgray;
+      opacity: 1;
+    }
+
+    :-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: lightgray;
+    }
+
+    .editIssueValue {
+      color: #fff;
+      padding: 20px;
+     /* display: none;*/
+      margin-top: 20px;
+    }
+
+    .LoanOpen {
+      background: #0000ff;
+    }
+
+    .MemeberOpen {
+      background: #0000ff;
+    }
+
+    .thirdPartyOpen {
+      background: #0000ff;
+    }
+
+    .CTSTIC {
+      background: #0000ff;
+    }
+
+    .TICLoan {
+      background: #0000ff;
+    }
+
+    .comments {
+      background: #0000ff;
+    }
+
+    input[type="text"] {
+      width: 300px;
+      height: 20px;
+      padding-right: 50px;
+    }
+
+    input[type="submit"] {
+      margin-left: -50px;
+      height: 25px;
+      width: 50px;
+      background: blue;
+      color: white;
+      border: 0;
+      -webkit-appearance: none;
+    }
+  </style> 
+</head>
+
+<body>
+  <h1>VelociT-Clearer: Edit Or Add Issue</h1>
+  <div>
+    <div id="container">
+    
+      <h1>Select state <i class="removeall">add Issue</i></h1>
+      <select id="updateState" class="updateState">| </select>
+      <div>
+     
+        <select id="updateIssue" class="updateIssue"></select>
+      </div>
+     
+    </div>
+  </div>
+
+
+
+  <div class="updateLoanOpen box">
+    <p><button class="updateLoanOpenBtn"> UPDATE </button>   LOAN PROCESSOR OPEN EMAIL: "During the review of the title search,...<p>
+    <textarea class="updateLoanOpen" id="updateLoanOpen" style="width:100%;" rows="5" defaultValue="type here"> </textarea>
+    
+  </div>
+  <div class="updateMemberOpen box">
+    <p><button class="updateMemberOpenBtn">UPDATE</button>MEMBER OPEN EMAIL: During the review of the title to your property,....</p> 
+    <textarea class="updateMemberOpen" id="updateMemberOpen" style="width:100%;" rows="5"> </textarea>
+    <p></p>
+  </div>
+  <div class="updateThirdPartyOpen box">
+    |<p> <button class="updatethirdPartyOpenBtn">update Opening Email to Third Party</button>3RD-PARTY OPEN EMAIL: NFTS is working on a refinance of the above property. During the review of the title search for the refinance...</p> 
+    <textarea class="updateThirdPartyOpen" id="updateThirdPartyOpen" style="width:100%;" rows="5"> </textarea>
+    <p></p>
+  </div>
+  <div class="updateCTSTIC box">
+    <p>ESCROW "Title Is Clear"Note: </p> 
+    <textarea class="updateCTSTIC" id="updateCTSTIC" style="width:100%;" rows="5"> </textarea>
+    <p><button class="updateCTSTICBtn">update CTS Clear note</button></p>
+  </div>
+  <div class="updateTicLoan box">
+    <p>LENDER "Title Is Clear"Note: </p> 
+    <textarea class="updateticLoan" id="updateTicLoan" style="width:100%;" rows="5"> </textarea>
+    <p><button class="updateTicLoanBtn">update TIC note to loan Processor</button></p>
+  </div>
+  <p>ISSUE COMMENTS: </p> 
+  <div class="updateComments box">
+    <p><button class="updateCommentsBtn">update TIC note to loan Processor</button></p>
+    <textarea class="updateComments" id="updateComments" style="width:100%;" rows="5"> </textarea>
+  </div>
+
+
+  </div>
+
+
+--> 
+</body>
+
+</html>
