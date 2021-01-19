@@ -1,24 +1,7 @@
 $(function () {
-  function upDateInfo() {
-    chrome.storage.sync.get('storedData', function (results) {
-      if (results.storedData !== data) {
-        chrome.storage.sync.get('storedData', function (results) {
-          data = results.storedData;
-          console.log('State info updated from storage to:')
-          console.log(data);
-          displayDrops();
-          console.log("storedData");
-        });
-      } else {
-        data = defaultData;
-        displayDrops();
-        console.log('defaultData');
-      }
-    })
-
-  };
-  upDateInfo();
+  var storage = 0;
   var data = [];
+  var issuesList = [];
   var defaultData = [
     {
       state: 'Attorney',
@@ -165,6 +148,8 @@ $(function () {
         }
       ]
     }];
+  // data = defaultData;
+
   function find(array, criteriaFn) {
     let current = array
     let next = []
@@ -181,14 +166,11 @@ $(function () {
     }
     return null;
   }
-
-  var issuesList = [];
   function updateState(stateName) {
     $("li").fadeOut(500, function () {
       $(this).remove();
       clearIssues();
     });
-
     var stateArray = find(data, number => number.state === stateName);
     issuesList = stateArray.issues; //array of objects containing all the selected state issues and statement values. 
     var options = '<option value=""><strong>issues</strong></option>';
@@ -197,11 +179,30 @@ $(function () {
     };
     document.getElementById('issue').innerHTML = options;
   };
+  function upDateInfo() {
+    chrome.storage.local.getBytesInUse((logbytes) => {
+      console.log(logbytes);
+      storage = logbytes;
+      if (storage === 0) {
+        console.log(storage);
+        data = defaultData;
+        console.log(data);
+        chrome.storage.local.set({ "data": defaultData });
+      } else {
+        chrome.storage.local.get((storedData) => {
+          data = storedData.data;
+          console.log("data set from storage")
+          console.log(data);
+          displayDrops()
+        });
+      }
+    });
+  };
+  upDateInfo();
 
   function displayDrops() {
     // displays states in dropdown
     var output = '<option value=""><strong>choose state</strong></option>';
-
     for (var i = 0; i < data.length; i++) {
       output += '<option>' + data[i].state + '</option>';
     }
@@ -218,7 +219,19 @@ $(function () {
     stateName = $(this).val();
     updateState(stateName);
   });
+  $(".popout").on("click", function () {   
 
+    var popupWindow = window.open(
+      chrome.extension.getURL("popup.html"),
+      "exampleName",
+      "width=600,height=600",
+    );
+    window.close(); // close the Chrome extension pop-up
+    console.log("popped out");
+    $("#popout").val="New Button Text";
+    
+  });
+  
 
   //toggles divs on and off
   $(document).ready(function () {
@@ -366,10 +379,10 @@ $(function () {
     var LoanOpenDefault = '';
 
 
-   // var expectedcleardate = today + 4;
+    // var expectedcleardate = today + 4;
     switch (IssueObj.length) {
       case 1:
-       LoanOpenDefault  = `${timeOfDay},
+        LoanOpenDefault = `${timeOfDay},
 
 I am working on the title portion of this refinance. During the review of the title search, ${IssueObj[0].lo}\n
 I will be reaching out to the necessary parties to resolve this issue and expect that title will be clear by TODAYS DATE PLUS MAX DATE. If you speak to the member, please let them know that we may be contacting them for additional information. As soon as title is clear, I will email you to advise.\n\n Please feel free to reach out to me directly with any questions or if I can be of any assistance.\n\nThank you,`

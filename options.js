@@ -19,8 +19,8 @@ $(function () {
     }
     return null;
   }
-  chrome.storage.sync.get(function (result) {
-    data = result.storedData;
+  chrome.storage.local.get(function (result) {
+    data = result.data;
     // displays states in dropdown  
     var output = '<option value=""><strong>choose state</strong></option>';
     for (var i = 0; i < data.length; i++) {
@@ -31,7 +31,7 @@ $(function () {
 
   $(".updateState").change(function () {
     selectedState = $(this).val();
-    console.log(selectedState);
+    //console.log(selectedState);
     updateState(selectedState);
   });
 
@@ -42,14 +42,12 @@ $(function () {
     changeBoxesDisplay();
   });
 
-
   function updateState(statename) {
-
     //console.log(output);
-    var stateArray = find(data, results => results.state == statename);
-    console.log(stateArray);
+    var stateArray = find(data, result => result.state == statename);
+    //console.log(stateArray);
     issuesList = stateArray.issues; //array of objects containing all the selected state issues and statement values. 
-    console.log(issuesList);
+    //console.log(issuesList);
     var options = '<option value=""><strong>issues</strong></option>';
     for (var i = 0; i < issuesList.length; i++) {
       options += '<option>' + issuesList[i].issue + '</option>';
@@ -57,7 +55,6 @@ $(function () {
     // console.log(options);
     document.getElementById('updateIssue').innerHTML = options;
   };
-
   //update buttons
   var updateLoanOpenBtn = document.querySelector('.updateLoanOpenBtn');
   var updateMemberOpenBtn = document.querySelector('.updateMemberOpenBtn');
@@ -68,15 +65,20 @@ $(function () {
 
   updateLoanOpenBtn.addEventListener('click', function (event) {
     var updateLoanOpen = document.getElementById("updateLoanOpen").value;
-    alert(updateLoanOpen);
-    chrome.storage.sync.get('storedData', function (results) {
-      data = results.storedData;
+    //alert(updateLoanOpen);
+    chrome.storage.local.get(function (result) {
+      console.log(result);
+      data = result.data;
+      console.log(data);
       var stateIndex = data.findIndex(data => data.state === selectedState);
+      console.log(stateIndex);
       var issuesArray = data[data.findIndex(data => data.state === selectedState)].issues;
+      console.log(issuesArray);
       var issueIndex = issuesArray.findIndex(data => data.issue === selectedIssue);
-
+      console.log(issueIndex);
       data[stateIndex]["issues"][issueIndex].lo = updateLoanOpen;
-      chrome.storage.sync.set({ "storedData": data }, function () {
+
+      chrome.storage.local.set({ "data": data }, function () {
 
         loanOpenDefaultUpdate = updateLoanOpen;
       });
@@ -85,14 +87,14 @@ $(function () {
   updateMemberOpenBtn.addEventListener('click', function (event) {
     var updateMemberOpen = document.getElementById("updateMemberOpen").value;
     alert(updateMemberOpen);
-    chrome.storage.sync.get('storedData', function (results) {
-      data = results.storedData;
+    chrome.storage.local.get('data', function (result) {
+      data = result.data;
       var stateIndex = data.findIndex(data => data.state === selectedState);
       var issuesArray = data[data.findIndex(data => data.state === selectedState)].issues;
       var issueIndex = issuesArray.findIndex(data => data.issue === selectedIssue);
 
       data[stateIndex]["issues"][issueIndex].mo = updateMemberOpen;
-      chrome.storage.sync.set({ "storedData": data }, function () {
+      chrome.storage.local.set({ "data": data }, function () {
 
         memberOpenDefaultUpdate = updateMemberOpen;
       });
@@ -101,14 +103,14 @@ $(function () {
   updatethirdPartyOpenBtn.addEventListener('click', function (event) {
     var updateThirdPartyOpen = document.getElementById("updateThirdPartyOpen").value;
     alert(updateThirdPartyOpen);
-    chrome.storage.sync.get('storedData', function (results) {
-      data = results.storedData;
+    chrome.storage.local.get('data', function (result) {
+      data = result.data;
       var stateIndex = data.findIndex(data => data.state === selectedState);
       var issuesArray = data[data.findIndex(data => data.state === selectedState)].issues;
       var issueIndex = issuesArray.findIndex(data => data.issue === selectedIssue);
 
       data[stateIndex]["issues"][issueIndex].tpo = updateThirdPartyOpen;
-      chrome.storage.sync.set({ "storedData": data }, function () {
+      chrome.storage.local.set({ "data": data }, function () {
 
         thirdPartyOpenDefaultUpdate = updateThirdPartyOpen;
       });
@@ -117,14 +119,14 @@ $(function () {
   updateCTSTICBtn.addEventListener('click', function (event) {
     var updateCTSTIC = document.getElementById("updateCTSTIC").value;
     alert(updateCTSTIC);
-    chrome.storage.sync.get('storedData', function (results) {
-      data = results.storedData;
+    chrome.storage.local.get('data', function (result) {
+      data = result.data;
       var stateIndex = data.findIndex(data => data.state === selectedState);
       var issuesArray = data[data.findIndex(data => data.state === selectedState)].issues;
       var issueIndex = issuesArray.findIndex(data => data.issue === selectedIssue);
 
       data[stateIndex]["issues"][issueIndex].etic = updateCTSTIC;
-      chrome.storage.sync.set({ "storedData": data }, function () {
+      chrome.storage.local.set({ "data": data }, function () {
         CTSTICDefaultUpdate = updateCTSTIC;
       });
     });
@@ -132,14 +134,14 @@ $(function () {
   updateticLoanBtn.addEventListener('click', function (event) {
     var updateTicLoan = document.getElementById("updateTicLoan").value;
     alert(updateTicLoan);
-    chrome.storage.sync.get('storedData', function (results) {
-      data = results.storedData;
+    chrome.storage.local.get('data', function (result) {
+      data = result.data;
       var stateIndex = data.findIndex(data => data.state === selectedState);
       var issuesArray = data[data.findIndex(data => data.state === selectedState)].issues;
       var issueIndex = issuesArray.findIndex(data => data.issue === selectedIssue);
 
       data[stateIndex]["issues"][issueIndex].ltic = updateCTSTIC;
-      chrome.storage.sync.set({ "storedData": data }, function () {
+      chrome.storage.local.set({ "data": data }, function () {
         ticLoanDefaultUpdate = updateTicLoan;
       });
     });
@@ -147,21 +149,21 @@ $(function () {
   updateCommentsBtn.addEventListener('click', function (event) {
     var updateComments = document.getElementById("updateComments").value;
     alert(updateComments);
-    chrome.storage.sync.get('storedData', function (results) {
-      data = results.storedData;
+    chrome.storage.local.get('data', function (result) {
+      data = result.data;
       var stateIndex = data.findIndex(data => data.state === selectedState);
       var issuesArray = data[data.findIndex(data => data.state === selectedState)].issues;
       var issueIndex = issuesArray.findIndex(data => data.issue === selectedIssue);
       data[stateIndex]["issues"][issueIndex].com = updateComments;
-      chrome.storage.sync.set({ "storedData": data }, function () {
+      chrome.storage.local.set({ "data": data }, function () {
         commentsDefaultUpdate = updateComments;
       });
     });
   });
 
   function changeBoxesDisplay() {
-    console.log(IssueObj);
-    console.log(selectedIssue);
+    //console.log(IssueObj);
+    //console.log(selectedIssue);
 
     var loanOpenDefaultUpdate = `${IssueObj[0].lo}`;
     var memberOpenDefaultUpdate = `${IssueObj[0].mo}`;
